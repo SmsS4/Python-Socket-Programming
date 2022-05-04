@@ -24,9 +24,5 @@ class Hello(AbstractModel):
         super().__init__(message_type)
 
 
-all_models = [
-    AbstractModel, Hello
-]
-all_models_map = {
-    model.MESSAGE_TYPE: model for model in all_models
-}
+all_models = [AbstractModel, Hello]
+all_models_map = {model.MESSAGE_TYPE: model for model in all_models}

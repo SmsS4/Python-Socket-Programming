@@ -7,7 +7,7 @@ from python_socket_programming.logger import get_logger
 
 
 class Server:
-    logger = get_logger('server')
+    logger = get_logger("server")
 
     def __init__(self, port: int):
         self.port = port
@@ -22,7 +22,7 @@ class Server:
     def start(self):
         self.logger.info("Starting server")
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.bind(('localhost', self.port))
+            s.bind(("localhost", self.port))
             s.listen()
             while True:
                 connection, address = s.accept()
@@ -35,5 +35,5 @@ def main():
     server.start()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

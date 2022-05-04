@@ -1,12 +1,12 @@
 import json
 import socket
-from logging import getLogger
 
 import models
+from python_socket_programming.logger import get_logger
 
 
-class Scanner:
-    logger = getLogger("scanner")
+class Connection:
+    logger = get_logger("connection")
     DELIMITER = '$'
 
     def __init__(self, connection: socket.socket):
@@ -25,3 +25,9 @@ class Scanner:
         self.buffer = self.buffer[pos + 1:]
         self.logger.info("New message %s", message.message_type)
         return message
+
+    def send_message(self, message: models.AbstractModel):
+        self.logger.info("Sending new message %s", message.message_type)
+        self.connection.send(
+            (json.dumps(message, default=lambda x: x.__dict__) + self.DELIMITER).encode()
+        )

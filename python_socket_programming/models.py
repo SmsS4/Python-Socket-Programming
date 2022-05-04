@@ -1,7 +1,8 @@
-from enum import Enum
+from enum import IntEnum
+from typing import Optional
 
 
-class MessageTypes(Enum):
+class MessageTypes(IntEnum):
     ABSTRACT = 1
     HELLO = 2
 
@@ -9,15 +10,18 @@ class MessageTypes(Enum):
 class AbstractModel:
     MESSAGE_TYPE = MessageTypes.ABSTRACT
 
-    def __init__(self):
-        self.message_type = self.MESSAGE_TYPE
+    def __init__(self, message_type: Optional[MessageTypes]):
+        if message_type:
+            self.message_type = message_type
+        else:
+            self.message_type = self.MESSAGE_TYPE
 
 
 class Hello(AbstractModel):
     MESSAGE_TYPE = MessageTypes.HELLO
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, message_type: MessageTypes = MessageTypes.HELLO):
+        super().__init__(message_type)
 
 
 all_models = [
